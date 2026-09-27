@@ -1,6 +1,6 @@
 /* =========================================================
    CONVITE DIGITAL — 15 ISABELLY MAURI
-   SCRIPT.JS
+   SCRIPT.JS — CORRIGIDO
 ========================================================= */
 
 
@@ -54,66 +54,86 @@ if (backgroundMusic) {
    ABRIR CONVITE
 ========================================================= */
 
-enterButton.addEventListener("click", async () => {
+if (enterButton) {
 
-    /*
-        O clique do usuário permite ao navegador
-        liberar a reprodução automática do áudio.
-    */
-
-    await startBackgroundMusic();
-
-
-    /*
-        Abre a cortina / animação inicial
-    */
-
-    opening.classList.add("opened");
-
-
-    /*
-        Depois da animação,
-        mostra o vídeo.
-    */
-
-    setTimeout(() => {
-
-        opening.classList.add("hidden");
-
-        videoScreen.classList.add("active");
-
-        videoScreen.setAttribute(
-            "aria-hidden",
-            "false"
-        );
+    enterButton.addEventListener("click", async () => {
 
         /*
-            O vídeo fica sem áudio porque
-            a música de fundo está tocando.
+            O clique do usuário permite ao navegador
+            liberar a reprodução automática do áudio.
         */
 
-        video.muted = true;
+        await startBackgroundMusic();
 
-        video.play()
-            .then(() => {
-                console.log("🎬 Vídeo iniciado.");
-            })
-            .catch((error) => {
 
-                console.warn(
-                    "Não foi possível iniciar o vídeo:",
-                    error
+        /*
+            Abre a cortina / animação inicial
+        */
+
+        if (opening) {
+            opening.classList.add("opened");
+        }
+
+
+        /*
+            Depois da animação,
+            mostra o vídeo.
+        */
+
+        setTimeout(() => {
+
+            if (opening) {
+                opening.classList.add("hidden");
+            }
+
+            if (videoScreen) {
+
+                videoScreen.classList.add("active");
+
+                videoScreen.setAttribute(
+                    "aria-hidden",
+                    "false"
                 );
+            }
 
-                notify(
-                    "Não foi possível iniciar o vídeo."
-                );
 
-            });
+            /*
+                O vídeo fica sem áudio porque
+                a música de fundo está tocando.
+            */
 
-    }, 900);
+            if (video) {
 
-});
+                video.muted = true;
+
+                video.play()
+                    .then(() => {
+
+                        console.log(
+                            "🎬 Vídeo iniciado."
+                        );
+
+                    })
+                    .catch((error) => {
+
+                        console.warn(
+                            "Não foi possível iniciar o vídeo:",
+                            error
+                        );
+
+                        notify(
+                            "Não foi possível iniciar o vídeo."
+                        );
+
+                    });
+
+            }
+
+        }, 900);
+
+    });
+
+}
 
 
 /* =========================================================
@@ -123,6 +143,7 @@ enterButton.addEventListener("click", async () => {
 async function startBackgroundMusic() {
 
     if (!backgroundMusic) {
+
         console.warn(
             "⚠️ Elemento backgroundMusic não encontrado."
         );
@@ -140,7 +161,9 @@ async function startBackgroundMusic() {
 
         updateSoundButton();
 
-        console.log("🎵 Música iniciada.");
+        console.log(
+            "🎵 Música iniciada."
+        );
 
     } catch (error) {
 
@@ -162,60 +185,68 @@ async function startBackgroundMusic() {
    CONTROLE DA MÚSICA
 ========================================================= */
 
-soundButton.addEventListener("click", async () => {
+if (soundButton) {
 
-    if (!backgroundMusic) {
-        return;
-    }
+    soundButton.addEventListener(
+        "click",
+        async () => {
+
+            if (!backgroundMusic) {
+                return;
+            }
 
 
-    /*
-        Se a música estiver tocando,
-        pausa.
-    */
+            /*
+                Se a música estiver tocando,
+                pausa.
+            */
 
-    if (!backgroundMusic.paused) {
+            if (!backgroundMusic.paused) {
 
-        backgroundMusic.pause();
+                backgroundMusic.pause();
 
-        musicEnabled = false;
+                musicEnabled = false;
 
-    }
+            }
 
-    /*
-        Se estiver pausada,
-        inicia novamente.
-    */
 
-    else {
+            /*
+                Se estiver pausada,
+                inicia novamente.
+            */
 
-        try {
+            else {
 
-            backgroundMusic.volume = 0.72;
+                try {
 
-            await backgroundMusic.play();
+                    backgroundMusic.volume = 0.72;
 
-            musicEnabled = true;
+                    await backgroundMusic.play();
 
-        } catch (error) {
+                    musicEnabled = true;
 
-            console.warn(
-                "Não foi possível reproduzir a música.",
-                error
-            );
+                } catch (error) {
 
-            notify(
-                "Toque novamente para ativar a música."
-            );
+                    console.warn(
+                        "Não foi possível reproduzir a música.",
+                        error
+                    );
+
+                    notify(
+                        "Toque novamente para ativar a música."
+                    );
+
+                }
+
+            }
+
+
+            updateSoundButton();
 
         }
+    );
 
-    }
-
-
-    updateSoundButton();
-
-});
+}
 
 
 /* =========================================================
@@ -241,7 +272,9 @@ function updateSoundButton() {
             "Desativar música"
         );
 
-    } else {
+    }
+
+    else {
 
         soundButton.textContent = "🔇";
 
@@ -259,11 +292,18 @@ function updateSoundButton() {
    FINAL DO VÍDEO
 ========================================================= */
 
-video.addEventListener("ended", () => {
+if (video) {
 
-    showMainInvite();
+    video.addEventListener(
+        "ended",
+        () => {
 
-});
+            showMainInvite();
+
+        }
+    );
+
+}
 
 
 /* =========================================================
@@ -289,22 +329,30 @@ function showMainInvite() {
         Esconde tela do vídeo.
     */
 
-    videoScreen.classList.remove("active");
+    if (videoScreen) {
 
-    videoScreen.setAttribute(
-        "aria-hidden",
-        "true"
-    );
+        videoScreen.classList.remove("active");
+
+        videoScreen.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+    }
 
 
     /*
         Mostra convite principal.
     */
 
-    mainInvite.setAttribute(
-        "aria-hidden",
-        "false"
-    );
+    if (mainInvite) {
+
+        mainInvite.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+    }
 
 
     /*
@@ -336,29 +384,40 @@ function showMainInvite() {
    PULAR VÍDEO
 ========================================================= */
 
-skipVideo.addEventListener("click", () => {
+if (skipVideo) {
 
-    showMainInvite();
+    skipVideo.addEventListener(
+        "click",
+        () => {
 
-});
+            showMainInvite();
+
+        }
+    );
+
+}
 
 
 /* =========================================================
    TECLA V — PULAR VÍDEO
 ========================================================= */
 
-document.addEventListener("keydown", (event) => {
+document.addEventListener(
+    "keydown",
+    (event) => {
 
-    if (
-        event.key.toLowerCase() === "v" &&
-        videoScreen.classList.contains("active")
-    ) {
+        if (
+            event.key.toLowerCase() === "v" &&
+            videoScreen &&
+            videoScreen.classList.contains("active")
+        ) {
 
-        showMainInvite();
+            showMainInvite();
+
+        }
 
     }
-
-});
+);
 
 
 /* =========================================================
@@ -411,20 +470,49 @@ function updateCountdown() {
         ) % 60;
 
 
-    document.getElementById("days").textContent =
-        String(days).padStart(2, "0");
+    const daysElement =
+        document.getElementById("days");
+
+    const hoursElement =
+        document.getElementById("hours");
+
+    const minutesElement =
+        document.getElementById("minutes");
+
+    const secondsElement =
+        document.getElementById("seconds");
 
 
-    document.getElementById("hours").textContent =
-        String(hours).padStart(2, "0");
+    if (daysElement) {
+
+        daysElement.textContent =
+            String(days).padStart(2, "0");
+
+    }
 
 
-    document.getElementById("minutes").textContent =
-        String(minutes).padStart(2, "0");
+    if (hoursElement) {
+
+        hoursElement.textContent =
+            String(hours).padStart(2, "0");
+
+    }
 
 
-    document.getElementById("seconds").textContent =
-        String(seconds).padStart(2, "0");
+    if (minutesElement) {
+
+        minutesElement.textContent =
+            String(minutes).padStart(2, "0");
+
+    }
+
+
+    if (secondsElement) {
+
+        secondsElement.textContent =
+            String(seconds).padStart(2, "0");
+
+    }
 
 }
 
@@ -505,7 +593,9 @@ if (copyPixButton) {
                     "PIX copiado com sucesso! 💗"
                 );
 
-            } catch (error) {
+            }
+
+            catch (error) {
 
                 /*
                     Fallback para navegadores
@@ -580,7 +670,9 @@ giftButtons.forEach((button) => {
                     "Sugestão copiada! 🎁"
                 );
 
-            } catch (error) {
+            }
+
+            catch (error) {
 
                 notify(
                     giftText
@@ -611,25 +703,42 @@ if (rsvpForm) {
             event.preventDefault();
 
 
+            const guestNameElement =
+                document.getElementById("guestName");
+
+
+            const companionsElement =
+                document.getElementById("guestCompanions");
+
+
+            const guestMessageElement =
+                document.getElementById("guestMessage");
+
+
             const guestName =
-                document
-                    .getElementById("guestName")
-                    .value
-                    .trim();
+                guestNameElement
+                    ? guestNameElement.value.trim()
+                    : "";
 
 
             const companions =
-                document
-                    .getElementById("guestCompanions")
-                    .value
-                    .trim();
+                companionsElement
+                    ? companionsElement.value.trim()
+                    : "";
 
+
+            /*
+                O campo guestMessage não existe
+                atualmente no HTML.
+
+                Por isso fazemos uma verificação
+                antes de tentar acessar o value.
+            */
 
             const guestMessage =
-                document
-                    .getElementById("guestMessage")
-                    .value
-                    .trim();
+                guestMessageElement
+                    ? guestMessageElement.value.trim()
+                    : "";
 
 
             /*
@@ -642,9 +751,11 @@ if (rsvpForm) {
                     "Digite seu nome para confirmar. 💗"
                 );
 
-                document
-                    .getElementById("guestName")
-                    .focus();
+                if (guestNameElement) {
+
+                    guestNameElement.focus();
+
+                }
 
                 return;
 
@@ -758,21 +869,25 @@ document.addEventListener(
    ERRO NO VÍDEO
 ========================================================= */
 
-video.addEventListener(
-    "error",
-    () => {
+if (video) {
 
-        console.warn(
-            "Vídeo não encontrado ou inválido."
-        );
+    video.addEventListener(
+        "error",
+        () => {
+
+            console.warn(
+                "Vídeo não encontrado ou inválido."
+            );
 
 
-        notify(
-            "Vídeo não encontrado. Verifique assets/video/convite.mp4"
-        );
+            notify(
+                "Vídeo não encontrado. Verifique assets/video/convite.mp4"
+            );
 
-    }
-);
+        }
+    );
+
+}
 
 
 /* =========================================================
@@ -815,7 +930,9 @@ function checkOrientation() {
             "landscape"
         );
 
-    } else {
+    }
+
+    else {
 
         document.body.classList.remove(
             "landscape"
