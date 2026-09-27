@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <meta name="theme-color" content="#05020b">
+
+    <meta name="description"
+          content="Convite especial para os 15 anos de Isabelly Mauri">
+
+    <title>15 Isabelly Mauri | Convite</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main id="invitation" class="invitation">
+
+        <!-- =====================================================
+             ABERTURA DO CONVITE
+        ====================================================== -->
+
+        <section id="opening"
+                 class="opening"
+                 aria-label="Abertura do convite">
+
+            <!-- Estrelas -->
+            <div class="stars" aria-hidden="true"></div>
+
+            <!-- Campo de discos -->
+            <div class="disco-field" aria-hidden="true">
+
+                <span class="disco d1"></span>
+                <span class="disco d2"></span>
+                <span class="disco d3"></span>
+                <span class="disco d4"></span>
+                <span class="disco d5"></span>
+                <span class="disco d6"></span>
+
+            </div>
+
+            <!-- Glow -->
+            <div class="stage-glow" aria-hidden="true"></div>
+
+            <!-- Cortinas -->
+            <div class="curtain curtain-left"
+                 aria-hidden="true"></div>
+
+            <div class="curtain curtain-right"
+                 aria-hidden="true"></div>
+
+
+            <!-- Conteúdo principal -->
+            <div class="opening-content">
+
+                <p class="eyebrow">
+                    UMA NOITE ESPECIAL ESTÁ CHEGANDO
+                </p>
+
+                <p class="prepare">
+                    PREPARE-SE<br>
+                    PARA VIVER<br>
+                    ESSA NOITE
+                </p>
+
+                <div class="hero-number">
+                    <span>15</span>
+                </div>
+
+                <div class="name-lockup">
+
+                    <div class="name-script">
+                        Isabelly
+                    </div>
+
+                    <div class="surname">
+                        MAURI
+                    </div>
+
+                </div>
+
+                <p class="opening-date">
+                    07 • 11 • 2026
+                    &nbsp; | &nbsp;
+                    20H
+                </p>
+
+
+                <!-- Botão de entrada -->
+                <button id="enterButton"
+                        class="enter-button"
+                        type="button">
+
+                    <span class="button-shine"></span>
+
+                    <span>
+                        ABRIR MEU CONVITE
+                    </span>
+
+                    <b>✦</b>
+
+                </button>
+
+
+                <p class="tap-hint">
+                    Toque para começar
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             ÁUDIO DE FUNDO
+        ====================================================== -->
+
+        <audio id="backgroundMusic"
+               loop
+               preload="auto">
+
+            <source
+                src="assets/audio/musica.mp3"
+                type="audio/mpeg">
+
+            Seu navegador não suporta áudio.
+
+        </audio>
+
+
+        <!-- =====================================================
+             VÍDEO
+        ====================================================== -->
+
+        <section id="videoScreen"
+                 class="video-screen"
+                 aria-hidden="true">
+
+            <video id="inviteVideo"
+                   playsinline
+                   preload="metadata"
+                   muted>
+
+                <source
+                    src="assets/video/convite.mp4"
+                    type="video/mp4">
+
+                Seu navegador não suporta vídeo.
+
+            </video>
+
+
+            <!-- Mensagem caso o vídeo não exista -->
+            <div class="video-fallback">
+
+                <p>
+                    Adicione seu vídeo em:
+                </p>
+
+                <code>
+                    assets/video/convite.mp4
+                </code>
+
+            </div>
+
+
+            <!-- Pular vídeo -->
+            <button id="skipVideo"
+                    class="skip-video"
+                    type="button">
+
+                Pular vídeo ›
+
+            </button>
+
+
+            <!-- Controle de música -->
+            <button id="soundButton"
+                    class="sound-button"
+                    type="button"
+                    aria-label="Ativar ou desativar música">
+
+                🔊
+
+            </button>
+
+        </section>
+
+
+        <!-- =====================================================
+             CONVITE PRINCIPAL
+        ====================================================== -->
+
+        <section id="mainInvite"
+                 class="main-invite"
+                 aria-hidden="true">
+
+            <div class="main-bg"
+                 aria-hidden="true">
+            </div>
+
+
+            <div class="main-content">
+
+
+                <!-- Cabeçalho -->
+
+                <p class="eyebrow">
+                    VOCÊ É MEU CONVIDADO ESPECIAL
+                </p>
+
+
+                <h1>
+                    Uma noite<br>
+                    <em>inesquecível</em>
+                </h1>
+
+
+                <div class="divider">
+                    ✦
+                </div>
+
+
+                <p class="intro">
+
+                    15 anos não acontecem duas vezes...<br>
+
+                    então vamos fazer essa noite
+                    valer a pena!
+
+                </p>
+
+
+                <!-- =================================================
+                     INFORMAÇÕES DO EVENTO
+                ================================================== -->
+
+                <div class="event-card">
+
+
+                    <div class="event-item">
+
+                        <span class="icon">
+                            ◷
+                        </span>
+
+                        <strong>
+                            07 NOV
+                        </strong>
+
+                        <small>
+                            2026
+                        </small>
+
+                    </div>
+
+
+                    <div class="event-item">
+
+                        <span class="icon">
+                            ◌
+                        </span>
+
+                        <strong>
+                            20H
+                        </strong>
+
+                        <small>
+                            INÍCIO
+                        </small>
+
+                    </div>
+
+
+                    <div class="event-item">
+
+                        <span class="icon">
+                            ⌖
+                        </span>
+
+                        <strong>
+                            CASA VILA
+                        </strong>
+
+                        <small>
+                            VILA VELHA • ES
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     CONTAGEM REGRESSIVA
+                ================================================== -->
+
+                <div class="countdown-card">
+
+                    <p>
+                        CONTAGEM REGRESSIVA
+                    </p>
+
+
+                    <div class="countdown">
+
+
+                        <div>
+
+                            <b id="days">
+                                00
+                            </b>
+
+                            <span>
+                                DIAS
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <b id="hours">
+                                00
+                            </b>
+
+                            <span>
+                                HORAS
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <b id="minutes">
+                                00
+                            </b>
+
+                            <span>
+                                MINUTOS
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <b id="seconds">
+                                00
+                            </b>
+
+                            <span>
+                                SEGUNDOS
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     BOTÕES
+                ================================================== -->
+
+                <div class="actions">
+
+                    <a class="action-button"
+                       href="#presentes">
+
+                        🎁 Lista de presentes
+
+                    </a>
+
+
+                    <a class="action-button"
+                       href="#presenca">
+
+                        ♥ Confirmar presença
+
+                    </a>
+
+                </div>
+
+
+                <!-- =================================================
+                     LISTA DE PRESENTES
+                ================================================== -->
+
+                <section id="presentes"
+                         class="info-section">
+
+                    <h2>
+                        Lista de presentes
+                    </h2>
+
+
+                    <p>
+
+                        Se quiser me presentear,
+                        aqui estão algumas ideias
+                        que vou amar!
+
+                    </p>
+
+
+                    <div class="gift-grid">
+
+
+                        <button type="button"
+                                class="gift"
+                                data-copy="Calçado — tamanho 39">
+
+                            👠
+
+                            <span>
+                                Calçado<br>
+                                <small>39</small>
+                            </span>
+
+                        </button>
+
+
+                        <button type="button"
+                                class="gift"
+                                data-copy="Roupas — tamanho P/M">
+
+                            👗
+
+                            <span>
+                                Roupas<br>
+                                <small>P/M</small>
+                            </span>
+
+                        </button>
+
+
+                        <button type="button"
+                                class="gift"
+                                data-copy="Acessórios — anel tamanho 17">
+
+                            💍
+
+                            <span>
+                                Acessórios<br>
+                                <small>Anel 17</small>
+                            </span>
+
+                        </button>
+
+
+                        <button type="button"
+                                class="gift"
+                                data-copy="Perfumes">
+
+                            ♜
+
+                            <span>
+                                Perfumes
+                            </span>
+
+                        </button>
+
+
+                        <button type="button"
+                                class="gift"
+                                data-copy="Piercing">
+
+                            ☆
+
+                            <span>
+                                Piercing
+                            </span>
+
+                        </button>
+
+
+                        <button type="button"
+                                class="gift"
+                                data-copy="Maquiagem">
+
+                            💄
+
+                            <span>
+                                Maquiagem
+                            </span>
+
+                        </button>
+
+
+                    </div>
+
+
+                    <!-- PIX -->
+
+                    <div class="pix-card">
+
+                        <span>
+                            PIX ♥
+                        </span>
+
+                        <strong id="pixKey">
+                            179.108.757-46
+                        </strong>
+
+                        <button id="copyPix"
+                                type="button">
+
+                            COPIAR PIX
+
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     CONFIRMAÇÃO DE PRESENÇA
+                ================================================== -->
+
+                <section id="presenca"
+                         class="info-section">
+
+                    <h2>
+                        Entre na lista VIP
+                    </h2>
+
+
+                    <p>
+
+                        Confirme sua presença
+                        e informe quem estará
+                        com você nessa noite.
+
+                    </p>
+
+
+                    <form id="rsvpForm">
+
+
+                        <label>
+
+                            Seu nome
+
+                            <input
+                                id="guestName"
+                                required
+                                type="text"
+                                placeholder="Digite seu nome">
+
+                        </label>
+
+
+                        <label>
+
+                            Convidados
+
+                            <input
+                                id="guestCompanions"
+                                type="text"
+                                placeholder="Nome do convidado">
+
+                        </label>
+
+
+                        <label>
+
+                            Mensagem
+
+                            <textarea
+                                id="guestMessage"
+                                rows="3"
+                                placeholder="Deixe uma mensagem para a Isabelly">
+                            </textarea>
+
+                        </label>
+
+
+                        <button
+                            class="whatsapp-button"
+                            type="submit">
+
+                            CONFIRMAR PELO WHATSAPP
+
+                        </button>
+
+
+                    </form>
+
+                </section>
+
+
+                <!-- =================================================
+                     RODAPÉ
+                ================================================== -->
+
+                <footer>
+
+                    ISABELLY MAURI
+                    •
+                    15 ANOS
+                    •
+                    07.11.2026
+
+                </footer>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             TOAST / NOTIFICAÇÕES
+        ====================================================== -->
+
+        <div id="toast"
+             class="toast"
+             role="status">
+        </div>
+
+
+    </main>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
