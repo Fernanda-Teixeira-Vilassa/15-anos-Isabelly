@@ -1746,6 +1746,327 @@ footer {
 }
 
 
+
+/* =========================================================
+   CONVIDADOS — ÁREA COMPLETA
+   Correção do campo + botão de remover + adicionar
+========================================================= */
+
+.guest-list-wrapper {
+    width: 100%;
+    margin-top: 4px;
+}
+
+.guest-list-wrapper > label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Lista */
+#guestList,
+.guest-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Cada convidado ocupa uma única linha */
+#guestList .guest-row,
+.guest-list .guest-row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 52px;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Campo do convidado */
+#guestList .guest-row .guest-companion,
+.guest-list .guest-row .guest-companion {
+    width: 100%;
+    min-width: 0;
+    min-height: 52px;
+    margin: 0;
+    padding: 15px 16px;
+    box-sizing: border-box;
+
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 13px;
+
+    background: rgba(3,5,18,.72);
+    color: #fff;
+
+    font-size: 16px;
+    line-height: 1.4;
+
+    outline: none;
+
+    transition:
+        border-color .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+}
+
+#guestList .guest-row .guest-companion::placeholder,
+.guest-list .guest-row .guest-companion::placeholder {
+    color: rgba(255,255,255,.55);
+}
+
+#guestList .guest-row .guest-companion:focus,
+.guest-list .guest-row .guest-companion:focus {
+    border-color: rgba(139,92,246,.75);
+    background: rgba(255,255,255,.04);
+    box-shadow:
+        0 0 0 3px rgba(139,92,246,.10),
+        0 0 20px rgba(139,92,246,.12);
+}
+
+/* =========================================================
+   BOTÃO REMOVER — X
+========================================================= */
+
+#guestList .remove-guest,
+.guest-list .remove-guest {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 52px;
+    min-width: 52px;
+    height: 52px;
+    min-height: 52px;
+
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    border: 1px solid rgba(255,100,180,.38);
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,70,170,.14),
+            rgba(139,92,246,.12)
+        );
+
+    color: #fff;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease,
+        color .2s ease;
+}
+
+#guestList .remove-guest:hover,
+.guest-list .remove-guest:hover {
+    transform: scale(1.04);
+
+    border-color: rgba(255,130,210,.85);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,70,170,.28),
+            rgba(139,92,246,.22)
+        );
+
+    color: #fff;
+
+    box-shadow:
+        0 0 18px rgba(255,70,180,.22);
+}
+
+#guestList .remove-guest:active,
+.guest-list .remove-guest:active {
+    transform: scale(.94);
+}
+
+#guestList .remove-guest:focus,
+.guest-list .remove-guest:focus {
+    outline: none;
+}
+
+#guestList .remove-guest:focus-visible,
+.guest-list .remove-guest:focus-visible {
+    outline: 2px solid rgba(196,181,253,.65);
+    outline-offset: 2px;
+}
+
+/* O atributo hidden deve realmente esconder o botão */
+#guestList .remove-guest[hidden],
+.guest-list .remove-guest[hidden] {
+    display: none !important;
+}
+
+/* =========================================================
+   BOTÃO + ADICIONAR CONVIDADO
+========================================================= */
+
+#addGuest.add-guest-button,
+.add-guest-button {
+    width: 100%;
+    min-height: 56px;
+
+    margin-top: 5px;
+    padding: 14px 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    border: 1px solid rgba(196,181,253,.50);
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139,92,246,.22),
+            rgba(59,130,246,.14)
+        );
+
+    color: #fff;
+
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1.2;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 18px rgba(139,92,246,.10);
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+}
+
+#addGuest.add-guest-button:hover,
+.add-guest-button:hover {
+    transform: translateY(-2px);
+
+    border-color: rgba(255,255,255,.80);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139,92,246,.34),
+            rgba(59,130,246,.24)
+        );
+
+    box-shadow:
+        0 8px 28px rgba(0,0,0,.25),
+        0 0 24px rgba(139,92,246,.25);
+}
+
+#addGuest.add-guest-button:active,
+.add-guest-button:active {
+    transform: scale(.98);
+}
+
+#addGuest.add-guest-button:focus-visible,
+.add-guest-button:focus-visible {
+    outline: 2px solid var(--silver-purple);
+    outline-offset: 3px;
+}
+
+/* =========================================================
+   FORMULÁRIO — GARANTE QUE OS CAMPOS DOS CONVIDADOS
+   NÃO HERDEM REGRAS QUE QUEBREM O GRID
+========================================================= */
+
+#rsvpForm .guest-list-wrapper input.guest-companion {
+    margin-top: 0;
+}
+
+#rsvpForm .guest-list-wrapper .guest-row {
+    text-align: left;
+}
+
+#rsvpForm .guest-list-wrapper .remove-guest {
+    flex: none;
+}
+
+/* =========================================================
+   RESPONSIVIDADE DOS CONVIDADOS
+========================================================= */
+
+@media (max-width: 620px) {
+    #guestList .guest-row,
+    .guest-list .guest-row {
+        grid-template-columns: minmax(0, 1fr) 48px;
+        gap: 8px;
+    }
+
+    #guestList .guest-row .guest-companion,
+    .guest-list .guest-row .guest-companion {
+        min-height: 52px;
+        padding: 14px 15px;
+        font-size: 16px;
+    }
+
+    #guestList .remove-guest,
+    .guest-list .remove-guest {
+        width: 48px;
+        min-width: 48px;
+        height: 52px;
+        min-height: 52px;
+        font-size: 23px;
+    }
+
+    #addGuest.add-guest-button,
+    .add-guest-button {
+        min-height: 56px;
+        font-size: 15px;
+        padding: 14px 16px;
+    }
+}
+
+@media (max-width: 380px) {
+    #guestList .guest-row,
+    .guest-list .guest-row {
+        grid-template-columns: minmax(0, 1fr) 44px;
+        gap: 7px;
+    }
+
+    #guestList .remove-guest,
+    .guest-list .remove-guest {
+        width: 44px;
+        min-width: 44px;
+        font-size: 21px;
+    }
+
+    #guestList .guest-row .guest-companion,
+    .guest-list .guest-row .guest-companion {
+        font-size: 15px;
+    }
+
+    #addGuest.add-guest-button,
+    .add-guest-button {
+        font-size: 14px;
+    }
+}
+
+
 /* =========================================================
    ACESSIBILIDADE
 ========================================================= */
