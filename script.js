@@ -1,6 +1,6 @@
 /* =========================================================
    CONVITE DIGITAL — 15 ISABELLY MAURI
-   SCRIPT.JS — CORRIGIDO
+   SCRIPT.JS
 ========================================================= */
 
 
@@ -54,86 +54,49 @@ if (backgroundMusic) {
    ABRIR CONVITE
 ========================================================= */
 
-if (enterButton) {
+enterButton.addEventListener("click", async () => {
 
-    enterButton.addEventListener("click", async () => {
+    await startBackgroundMusic();
 
-        /*
-            O clique do usuário permite ao navegador
-            liberar a reprodução automática do áudio.
-        */
+    opening.classList.add("opened");
 
-        await startBackgroundMusic();
+    setTimeout(() => {
 
+        opening.classList.add("hidden");
 
-        /*
-            Abre a cortina / animação inicial
-        */
+        videoScreen.classList.add("active");
 
-        if (opening) {
-            opening.classList.add("opened");
-        }
+        videoScreen.setAttribute(
+            "aria-hidden",
+            "false"
+        );
 
+        video.muted = true;
 
-        /*
-            Depois da animação,
-            mostra o vídeo.
-        */
+        video.play()
+            .then(() => {
 
-        setTimeout(() => {
-
-            if (opening) {
-                opening.classList.add("hidden");
-            }
-
-            if (videoScreen) {
-
-                videoScreen.classList.add("active");
-
-                videoScreen.setAttribute(
-                    "aria-hidden",
-                    "false"
+                console.log(
+                    "🎬 Vídeo iniciado."
                 );
-            }
 
+            })
+            .catch((error) => {
 
-            /*
-                O vídeo fica sem áudio porque
-                a música de fundo está tocando.
-            */
+                console.warn(
+                    "Não foi possível iniciar o vídeo:",
+                    error
+                );
 
-            if (video) {
+                notify(
+                    "Não foi possível iniciar o vídeo."
+                );
 
-                video.muted = true;
+            });
 
-                video.play()
-                    .then(() => {
+    }, 900);
 
-                        console.log(
-                            "🎬 Vídeo iniciado."
-                        );
-
-                    })
-                    .catch((error) => {
-
-                        console.warn(
-                            "Não foi possível iniciar o vídeo:",
-                            error
-                        );
-
-                        notify(
-                            "Não foi possível iniciar o vídeo."
-                        );
-
-                    });
-
-            }
-
-        }, 900);
-
-    });
-
-}
+});
 
 
 /* =========================================================
@@ -185,68 +148,49 @@ async function startBackgroundMusic() {
    CONTROLE DA MÚSICA
 ========================================================= */
 
-if (soundButton) {
+soundButton.addEventListener(
+    "click",
+    async () => {
 
-    soundButton.addEventListener(
-        "click",
-        async () => {
+        if (!backgroundMusic) {
+            return;
+        }
 
-            if (!backgroundMusic) {
-                return;
-            }
+        if (!backgroundMusic.paused) {
 
+            backgroundMusic.pause();
 
-            /*
-                Se a música estiver tocando,
-                pausa.
-            */
+            musicEnabled = false;
 
-            if (!backgroundMusic.paused) {
+        } else {
 
-                backgroundMusic.pause();
+            try {
 
-                musicEnabled = false;
+                backgroundMusic.volume = 0.72;
 
-            }
+                await backgroundMusic.play();
 
+                musicEnabled = true;
 
-            /*
-                Se estiver pausada,
-                inicia novamente.
-            */
+            } catch (error) {
 
-            else {
+                console.warn(
+                    "Não foi possível reproduzir a música.",
+                    error
+                );
 
-                try {
-
-                    backgroundMusic.volume = 0.72;
-
-                    await backgroundMusic.play();
-
-                    musicEnabled = true;
-
-                } catch (error) {
-
-                    console.warn(
-                        "Não foi possível reproduzir a música.",
-                        error
-                    );
-
-                    notify(
-                        "Toque novamente para ativar a música."
-                    );
-
-                }
+                notify(
+                    "Toque novamente para ativar a música."
+                );
 
             }
-
-
-            updateSoundButton();
 
         }
-    );
 
-}
+        updateSoundButton();
+
+    }
+);
 
 
 /* =========================================================
@@ -272,9 +216,7 @@ function updateSoundButton() {
             "Desativar música"
         );
 
-    }
-
-    else {
+    } else {
 
         soundButton.textContent = "🔇";
 
@@ -292,18 +234,14 @@ function updateSoundButton() {
    FINAL DO VÍDEO
 ========================================================= */
 
-if (video) {
+video.addEventListener(
+    "ended",
+    () => {
 
-    video.addEventListener(
-        "ended",
-        () => {
+        showMainInvite();
 
-            showMainInvite();
-
-        }
-    );
-
-}
+    }
+);
 
 
 /* =========================================================
@@ -311,10 +249,6 @@ if (video) {
 ========================================================= */
 
 function showMainInvite() {
-
-    /*
-        Para o vídeo.
-    */
 
     if (video) {
 
@@ -324,47 +258,19 @@ function showMainInvite() {
 
     }
 
+    videoScreen.classList.remove("active");
 
-    /*
-        Esconde tela do vídeo.
-    */
+    videoScreen.setAttribute(
+        "aria-hidden",
+        "true"
+    );
 
-    if (videoScreen) {
-
-        videoScreen.classList.remove("active");
-
-        videoScreen.setAttribute(
-            "aria-hidden",
-            "true"
-        );
-
-    }
-
-
-    /*
-        Mostra convite principal.
-    */
-
-    if (mainInvite) {
-
-        mainInvite.setAttribute(
-            "aria-hidden",
-            "false"
-        );
-
-    }
-
-
-    /*
-        Libera rolagem.
-    */
+    mainInvite.setAttribute(
+        "aria-hidden",
+        "false"
+    );
 
     document.body.style.overflow = "auto";
-
-
-    /*
-        Garante que a música continue.
-    */
 
     if (
         backgroundMusic &&
@@ -384,18 +290,14 @@ function showMainInvite() {
    PULAR VÍDEO
 ========================================================= */
 
-if (skipVideo) {
+skipVideo.addEventListener(
+    "click",
+    () => {
 
-    skipVideo.addEventListener(
-        "click",
-        () => {
+        showMainInvite();
 
-            showMainInvite();
-
-        }
-    );
-
-}
+    }
+);
 
 
 /* =========================================================
@@ -408,7 +310,6 @@ document.addEventListener(
 
         if (
             event.key.toLowerCase() === "v" &&
-            videoScreen &&
             videoScreen.classList.contains("active")
         ) {
 
@@ -431,12 +332,6 @@ function updateCountdown() {
     let difference =
         EVENT_DATE.getTime() -
         now.getTime();
-
-
-    /*
-        Quando chegar a data,
-        mantém zerado.
-    */
 
     if (difference < 0) {
         difference = 0;
@@ -470,49 +365,20 @@ function updateCountdown() {
         ) % 60;
 
 
-    const daysElement =
-        document.getElementById("days");
-
-    const hoursElement =
-        document.getElementById("hours");
-
-    const minutesElement =
-        document.getElementById("minutes");
-
-    const secondsElement =
-        document.getElementById("seconds");
+    document.getElementById("days").textContent =
+        String(days).padStart(2, "0");
 
 
-    if (daysElement) {
-
-        daysElement.textContent =
-            String(days).padStart(2, "0");
-
-    }
+    document.getElementById("hours").textContent =
+        String(hours).padStart(2, "0");
 
 
-    if (hoursElement) {
-
-        hoursElement.textContent =
-            String(hours).padStart(2, "0");
-
-    }
+    document.getElementById("minutes").textContent =
+        String(minutes).padStart(2, "0");
 
 
-    if (minutesElement) {
-
-        minutesElement.textContent =
-            String(minutes).padStart(2, "0");
-
-    }
-
-
-    if (secondsElement) {
-
-        secondsElement.textContent =
-            String(seconds).padStart(2, "0");
-
-    }
+    document.getElementById("seconds").textContent =
+        String(seconds).padStart(2, "0");
 
 }
 
@@ -538,14 +404,11 @@ function notify(message) {
         return;
     }
 
-
     toast.textContent = message;
 
     toast.classList.add("show");
 
-
     clearTimeout(toastTimer);
-
 
     toastTimer = setTimeout(() => {
 
@@ -593,37 +456,24 @@ if (copyPixButton) {
                     "PIX copiado com sucesso! 💗"
                 );
 
-            }
-
-            catch (error) {
-
-                /*
-                    Fallback para navegadores
-                    que não permitem clipboard.
-                */
+            } catch (error) {
 
                 const temporaryInput =
                     document.createElement("input");
 
-
                 temporaryInput.value = pix;
-
 
                 document.body.appendChild(
                     temporaryInput
                 );
 
-
                 temporaryInput.select();
-
 
                 document.execCommand(
                     "copy"
                 );
 
-
                 temporaryInput.remove();
-
 
                 notify(
                     "PIX copiado!"
@@ -670,9 +520,7 @@ giftButtons.forEach((button) => {
                     "Sugestão copiada! 🎁"
                 );
 
-            }
-
-            catch (error) {
+            } catch (error) {
 
                 notify(
                     giftText
@@ -703,37 +551,30 @@ if (rsvpForm) {
             event.preventDefault();
 
 
-            const guestNameElement =
-                document.getElementById("guestName");
-
-
-            const companionsElement =
-                document.getElementById("guestCompanions");
-
-
-            const guestMessageElement =
-                document.getElementById("guestMessage");
-
-
             const guestName =
-                guestNameElement
-                    ? guestNameElement.value.trim()
-                    : "";
+                document
+                    .getElementById("guestName")
+                    .value
+                    .trim();
 
 
             const companions =
-                companionsElement
-                    ? companionsElement.value.trim()
-                    : "";
+                document
+                    .getElementById("guestCompanions")
+                    .value
+                    .trim();
 
 
             /*
-                O campo guestMessage não existe
-                atualmente no HTML.
-
-                Por isso fazemos uma verificação
-                antes de tentar acessar o value.
+                O campo guestMessage é opcional.
+                Caso não exista no HTML, não gera erro.
             */
+
+            const guestMessageElement =
+                document.getElementById(
+                    "guestMessage"
+                );
+
 
             const guestMessage =
                 guestMessageElement
@@ -741,9 +582,7 @@ if (rsvpForm) {
                     : "";
 
 
-            /*
-                Validação do nome.
-            */
+            /* Validação */
 
             if (!guestName) {
 
@@ -751,20 +590,18 @@ if (rsvpForm) {
                     "Digite seu nome para confirmar. 💗"
                 );
 
-                if (guestNameElement) {
-
-                    guestNameElement.focus();
-
-                }
+                document
+                    .getElementById("guestName")
+                    .focus();
 
                 return;
 
             }
 
 
-            /*
-                Mensagem enviada para o WhatsApp.
-            */
+            /* =================================================
+               MENSAGEM PARA WHATSAPP
+            ================================================= */
 
             const whatsappMessage =
 `Olá! Quero confirmar minha presença no aniversário de 15 anos da Isabelly. 💗
@@ -779,7 +616,9 @@ ${guestMessage || "Sem mensagem"}
 
 Evento:
 07/11/2026 às 20h
-Cerimonial Casa Vila
+
+Casa Vila Cerimonial
+Rua Elis Regina, 365 - Nova Itaparica
 Vila Velha - ES`;
 
 
@@ -812,10 +651,6 @@ Vila Velha - ES`;
 document.addEventListener(
     "mousemove",
     (event) => {
-
-        /*
-            Não executa em celular.
-        */
 
         if (window.innerWidth <= 768) {
             return;
@@ -869,25 +704,21 @@ document.addEventListener(
    ERRO NO VÍDEO
 ========================================================= */
 
-if (video) {
+video.addEventListener(
+    "error",
+    () => {
 
-    video.addEventListener(
-        "error",
-        () => {
-
-            console.warn(
-                "Vídeo não encontrado ou inválido."
-            );
+        console.warn(
+            "Vídeo não encontrado ou inválido."
+        );
 
 
-            notify(
-                "Vídeo não encontrado. Verifique assets/video/convite.mp4"
-            );
+        notify(
+            "Vídeo não encontrado. Verifique assets/video/convite.mp4"
+        );
 
-        }
-    );
-
-}
+    }
+);
 
 
 /* =========================================================
@@ -930,9 +761,7 @@ function checkOrientation() {
             "landscape"
         );
 
-    }
-
-    else {
+    } else {
 
         document.body.classList.remove(
             "landscape"
