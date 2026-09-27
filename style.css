@@ -4,14 +4,16 @@
 ========================================================= */
 
 :root {
-    --pink: #ff2f9f;
-    --pink-soft: #ff72c4;
-    --blue: #3d8dff;
-    --blue-soft: #73b7ff;
-    --violet: #8c4dff;
+    --purple: #8b5cf6;
+    --silver-purple: #c4b5fd;
+    --blue: #3b82f6;
+    --blue-soft: #93c5fd;
+    --silver: #cbd5e1;
+    --silver-bright: #e2e8f0;
+    --violet: #7c3aed;
 
-    --bg: #05020b;
-    --bg-dark: #020106;
+    --bg: #050816;
+    --bg-dark: #02040d;
 
     --glass: rgba(255, 255, 255, 0.07);
     --glass-strong: rgba(255, 255, 255, 0.11);
@@ -24,13 +26,13 @@
     --shadow:
         0 20px 80px rgba(0, 0, 0, 0.55);
 
-    --glow-pink:
-        0 0 20px rgba(255, 47, 159, 0.65),
-        0 0 60px rgba(255, 47, 159, 0.25);
+    --glow-purple:
+        0 0 20px rgba(139, 92, 246, 0.65),
+        0 0 60px rgba(139, 92, 246, 0.25);
 
     --glow-blue:
-        0 0 20px rgba(61, 141, 255, 0.65),
-        0 0 60px rgba(61, 141, 255, 0.25);
+        0 0 20px rgba(59, 130, 246, 0.65),
+        0 0 60px rgba(59, 130, 246, 0.25);
 }
 
 
@@ -57,7 +59,7 @@ body {
             rgba(91, 30, 125, 0.16),
             transparent 40%
         ),
-        #05020b;
+        #050816;
 
     color: var(--text);
 
@@ -127,9 +129,9 @@ a {
         ),
         linear-gradient(
             180deg,
-            #020107 0%,
-            #080313 45%,
-            #020106 100%
+            #02040d 0%,
+            #0a0f24 45%,
+            #02040d 100%
         );
 
     transition:
@@ -162,7 +164,7 @@ a {
     background-image:
         radial-gradient(circle, #fff 1px, transparent 1px),
         radial-gradient(circle, rgba(255,255,255,.7) 1px, transparent 1px),
-        radial-gradient(circle, rgba(255,80,190,.7) 1px, transparent 1px);
+        radial-gradient(circle, rgba(167,139,250,.70) 1px, transparent 1px);
 
     background-size:
         120px 120px,
@@ -262,9 +264,9 @@ a {
         repeating-conic-gradient(
             from 0deg,
             #ffffff 0deg 5deg,
-            #999 5deg 10deg,
-            #222 10deg 15deg,
-            #ddd 15deg 20deg
+            #9ca3af 5deg 10deg,
+            #182033 10deg 15deg,
+            #dbeafe 15deg 20deg
         );
 
     box-shadow:
@@ -397,9 +399,9 @@ a {
         ),
         linear-gradient(
             90deg,
-            #07000c,
-            #240021,
-            #07000c
+            #070a18,
+            #17112f,
+            #070a18
         );
 
     box-shadow:
@@ -536,7 +538,7 @@ a {
     border-radius: 50%;
 
     border:
-        1px solid rgba(255,47,159,.35);
+        1px solid rgba(139,92,246,.35);
 
     animation:
         numberPulse 3s ease-in-out infinite;
@@ -560,8 +562,8 @@ a {
         linear-gradient(
             135deg,
             #ffffff 5%,
-            #ff9bdb 35%,
-            #ff2f9f 55%,
+            #d8b4fe 35%,
+            #8b5cf6 55%,
             #ffffff 85%
         );
 
@@ -569,7 +571,7 @@ a {
     background-clip: text;
 
     filter:
-        drop-shadow(0 0 20px rgba(255,47,159,.45));
+        drop-shadow(0 0 20px rgba(139,92,246,.45));
 
     z-index: 2;
 }
@@ -613,7 +615,7 @@ a {
 
     text-shadow:
         0 0 8px rgba(255,255,255,.6),
-        0 0 30px rgba(255,47,159,.4);
+        0 0 30px rgba(139,92,246,.40);
 
     transform: rotate(-4deg);
 }
@@ -670,7 +672,7 @@ a {
     background:
         linear-gradient(
             100deg,
-            rgba(255,47,159,.2),
+            rgba(139,92,246,.20),
             rgba(80,80,255,.18)
         );
 
@@ -685,7 +687,7 @@ a {
     overflow: hidden;
 
     box-shadow:
-        0 0 30px rgba(255,47,159,.15);
+        0 0 30px rgba(139,92,246,.15);
 
     backdrop-filter: blur(10px);
 
@@ -701,7 +703,7 @@ a {
     border-color: rgba(255,255,255,.8);
 
     box-shadow:
-        0 0 25px rgba(255,47,159,.35),
+        0 0 25px rgba(139,92,246,.35),
         0 10px 40px rgba(0,0,0,.4);
 }
 
@@ -798,14 +800,43 @@ a {
 }
 
 .video-screen video {
-    width: 100%;
-    height: 100%;
+    display: block;
 
-    object-fit: cover;
+    /* O vídeo nunca deve ser ampliado para preencher e cortar conteúdo */
+    width: auto;
+    height: auto;
+
+    max-width: 100%;
+    max-height: 100%;
+
+    object-fit: contain;
+    object-position: center center;
+
+    /* Impede qualquer transformação visual do elemento */
+    transform: none !important;
 
     background: #000;
 }
 
+/* =========================================================
+   VÍDEO — MOBILE / INSTAGRAM
+   Exibe o vídeo inteiro, sem ampliar/cortar textos.
+========================================================= */
+.video-screen { position: fixed; inset: 0; width:100vw; height:100dvh; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#02040d; }
+.video-screen video { display:block; width:auto; height:auto; max-width:100%; max-height:100%; object-fit:contain; object-position:center center; transform:none !important; }
+@media (max-width:768px) and (orientation:portrait) {
+ .video-screen { width:100vw; height:100dvh; min-height:100dvh; padding:env(safe-area-inset-top) 12px env(safe-area-inset-bottom); align-items:center; justify-content:center; overflow:hidden; background:#02040d; }
+ .video-screen video { width:auto; height:auto; max-height:92dvh; max-width:94vw; aspect-ratio:9/16; object-fit:contain; object-position:center center; margin:auto; transform:none !important; }
+}
+@media (max-width:480px) and (orientation:portrait) {
+ .video-screen { padding-left:14px; padding-right:14px; }
+ .video-screen video { max-height:89dvh; max-width:92vw; }
+}
+@media (max-width:380px) and (orientation:portrait) { .video-screen video { max-height:87dvh; max-width:90vw; } }
+@media (max-width:900px) and (orientation:landscape) {
+ .video-screen { width:100vw; height:100dvh; align-items:center; justify-content:center; overflow:hidden; }
+ .video-screen video { width:auto; height:auto; max-height:94dvh; max-width:94vw; object-fit:contain; object-position:center center; transform:none !important; }
+}
 
 /* =========================================================
    FALLBACK DO VÍDEO
@@ -843,7 +874,7 @@ a {
 
     margin-top: 8px;
 
-    color: var(--pink-soft);
+    color: var(--silver-purple);
 }
 
 
@@ -876,7 +907,7 @@ a {
 .skip-video:hover,
 .sound-button:hover {
     background:
-        rgba(255,47,159,.25);
+        rgba(139,92,246,.25);
 
     border-color:
         rgba(255,255,255,.55);
@@ -937,7 +968,7 @@ a {
             rgba(48, 113, 255, .13),
             transparent 35%
         ),
-        #05020b;
+        #050816;
 }
 
 
@@ -982,7 +1013,7 @@ a {
     left: -120px;
     top: 25%;
 
-    background: var(--pink);
+    background: var(--purple);
 }
 
 .main-bg::after {
@@ -1052,7 +1083,7 @@ a {
         linear-gradient(
             90deg,
             #fff,
-            #ff72c4,
+            #c4b5fd,
             #a78cff,
             #fff
         );
@@ -1078,14 +1109,14 @@ a {
 }
 
 .divider {
-    color: var(--pink-soft);
+    color: var(--silver-purple);
 
     font-size: 20px;
 
     margin: 10px 0 20px;
 
     text-shadow:
-        0 0 15px var(--pink);
+        0 0 15px var(--purple);
 }
 
 .intro {
@@ -1162,12 +1193,12 @@ a {
 .event-item .icon {
     font-size: 25px;
 
-    color: var(--pink-soft);
+    color: var(--silver-purple);
 
     margin-bottom: 12px;
 
     text-shadow:
-        0 0 15px var(--pink);
+        0 0 15px var(--purple);
 }
 
 .event-item strong {
@@ -1254,7 +1285,7 @@ a {
     color: #fff;
 
     text-shadow:
-        0 0 20px rgba(255,47,159,.4);
+        0 0 20px rgba(139,92,246,.40);
 }
 
 .countdown span {
@@ -1304,7 +1335,7 @@ a {
     background:
         linear-gradient(
             100deg,
-            rgba(255,47,159,.12),
+            rgba(139,92,246,.12),
             rgba(70,100,255,.10)
         );
 
@@ -1326,7 +1357,7 @@ a {
     background:
         linear-gradient(
             100deg,
-            rgba(255,47,159,.25),
+            rgba(139,92,246,.25),
             rgba(70,100,255,.2)
         );
 
@@ -1426,10 +1457,10 @@ a {
     transform: translateY(-4px);
 
     background:
-        rgba(255,47,159,.1);
+        rgba(139,92,246,.10);
 
     border-color:
-        rgba(255,47,159,.4);
+        rgba(139,92,246,.40);
 }
 
 .gift > *:first-child {
@@ -1469,7 +1500,7 @@ a {
     background:
         linear-gradient(
             135deg,
-            rgba(255,47,159,.12),
+            rgba(139,92,246,.12),
             rgba(80,80,255,.1)
         );
 
@@ -1482,7 +1513,7 @@ a {
 
     letter-spacing: 3px;
 
-    color: var(--pink-soft);
+    color: var(--silver-purple);
 }
 
 .pix-card strong {
@@ -1519,7 +1550,7 @@ a {
 
 .pix-card button:hover {
     background:
-        rgba(255,47,159,.2);
+        rgba(139,92,246,.20);
 
     transform: translateY(-2px);
 }
@@ -1588,13 +1619,13 @@ a {
 #rsvpForm input:focus,
 #rsvpForm textarea:focus {
     border-color:
-        rgba(255,47,159,.6);
+        rgba(139,92,246,.60);
 
     background:
         rgba(255,255,255,.04);
 
     box-shadow:
-        0 0 0 3px rgba(255,47,159,.08);
+        0 0 0 3px rgba(139,92,246,.08);
 }
 
 
@@ -1614,7 +1645,7 @@ a {
     background:
         linear-gradient(
             90deg,
-            #ff2f9f,
+            #8b5cf6,
             #7a45ff
         );
 
@@ -1627,7 +1658,7 @@ a {
     letter-spacing: 1.5px;
 
     box-shadow:
-        0 10px 35px rgba(255,47,159,.2);
+        0 10px 35px rgba(139,92,246,.20);
 
     transition:
         transform .25s ease,
@@ -1638,7 +1669,7 @@ a {
     transform: translateY(-3px);
 
     box-shadow:
-        0 15px 45px rgba(255,47,159,.35);
+        0 15px 45px rgba(139,92,246,.35);
 }
 
 .whatsapp-button:active {
@@ -1724,7 +1755,7 @@ a:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
     outline:
-        2px solid var(--pink-soft);
+        2px solid var(--silver-purple);
 
     outline-offset: 3px;
 }

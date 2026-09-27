@@ -561,29 +561,52 @@
                         </label>
 
 
-                        <label>
+                        <!-- =================================================
+                             CONVIDADOS ADICIONAIS
+                        ================================================== -->
 
-                            Convidados
+                        <div class="guest-list-wrapper">
 
+                            <label>
+                                Convidado(s)
+                            </label>
+
+                            <div id="guestList" class="guest-list">
+
+                                <div class="guest-row">
+                                    <input
+                                        class="guest-companion"
+                                        type="text"
+                                        placeholder="Nome do convidado"
+                                        autocomplete="name">
+
+                                    <button
+                                        type="button"
+                                        class="remove-guest"
+                                        aria-label="Remover convidado"
+                                        title="Remover convidado"
+                                        hidden>
+                                        ×
+                                    </button>
+                                </div>
+
+                            </div>
+
+                            <button
+                                id="addGuest"
+                                class="add-guest-button"
+                                type="button">
+                                + ADICIONAR CONVIDADO
+                            </button>
+
+                            <!-- Campo usado pelo JavaScript/WhatsApp -->
                             <input
                                 id="guestCompanions"
-                                type="text"
-                                placeholder="Nome do convidado">
+                                type="hidden"
+                                value="">
+                        </div>
 
-                        </label>
-
-
-                        <label>
-
-                            Mensagem
-
-                            <textarea
-                                id="guestMessage"
-                                rows="3"
-                                placeholder="Deixe uma mensagem para a Isabelly">
-                            </textarea>
-
-                        </label>
+                        <!-- A confirmação não possui campo de mensagem. -->
 
 
                         <button
@@ -638,6 +661,84 @@
     ========================================================== -->
 
     <script src="script.js"></script>
+
+    <script>
+    /* =========================================================
+       CONVIDADOS — ADICIONAR / REMOVER
+       Mantém o campo guestCompanions sincronizado para o
+       JavaScript principal e para a confirmação pelo WhatsApp.
+    ========================================================= */
+    (() => {
+        const guestList = document.getElementById("guestList");
+        const addGuest = document.getElementById("addGuest");
+        const guestCompanions = document.getElementById("guestCompanions");
+
+        if (!guestList || !addGuest || !guestCompanions) return;
+
+        function updateGuestField() {
+            const names = [...guestList.querySelectorAll(".guest-companion")]
+                .map(input => input.value.trim())
+                .filter(Boolean);
+
+            guestCompanions.value = names.join(", ");
+        }
+
+        function updateRemoveButtons() {
+            const rows = [...guestList.querySelectorAll(".guest-row")];
+
+            rows.forEach(row => {
+                const button = row.querySelector(".remove-guest");
+                if (button) {
+                    button.hidden = rows.length === 1;
+                }
+            });
+        }
+
+        function createGuestRow() {
+            const row = document.createElement("div");
+            row.className = "guest-row";
+
+            row.innerHTML = `
+                <input
+                    class="guest-companion"
+                    type="text"
+                    placeholder="Nome do convidado"
+                    autocomplete="name">
+
+                <button
+                    type="button"
+                    class="remove-guest"
+                    aria-label="Remover convidado"
+                    title="Remover convidado">
+                    ×
+                </button>
+            `;
+
+            guestList.appendChild(row);
+
+            const input = row.querySelector(".guest-companion");
+            const remove = row.querySelector(".remove-guest");
+
+            input.addEventListener("input", updateGuestField);
+
+            remove.addEventListener("click", () => {
+                row.remove();
+                updateRemoveButtons();
+                updateGuestField();
+            });
+
+            updateRemoveButtons();
+            input.focus();
+        }
+
+        addGuest.addEventListener("click", createGuestRow);
+
+        guestList.addEventListener("input", updateGuestField);
+
+        updateGuestField();
+        updateRemoveButtons();
+    })();
+    </script>
 
 </body>
 
